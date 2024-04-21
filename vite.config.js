@@ -1,3 +1,3 @@
 export default {
-  base: "/Core-Gameplay-Prototype/",
+  base: "/Bite-Sized-Dungeons-Combat-Prototype/",
 };

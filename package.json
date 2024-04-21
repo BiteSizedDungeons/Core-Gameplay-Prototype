@@ -1,5 +1,5 @@
 {
-  "name": "bite-sized-dungeons",
+  "name": "combat-prototype",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/webfontloader": "^1.6.38",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "phaser": "^3.80.1"
+    "phaser": "^3.70.0",
+    "webfontloader": "^1.6.28"
   }
 }

@@ -1,9 +1,5 @@
-# Core-Gameplay-Prototype
-To be in working on the repository, clone/fork the repo, open the terminal, and the type:
+﻿# Bite-Sized-Dungeons-Combat-Prototype
+To open in your terminal, navigate to the root folder and do
 
-npm install --> npm run dev
-
-# Phaser Quick Start Guide
-transition between scenes: this.scene.start(#Scene Key (see scene constructor));
-
-to get the game dimensions: bsd.config.[width/height];
+npm install
+npm run dev
