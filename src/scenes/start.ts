@@ -78,7 +78,7 @@ export class Start extends Phaser.Scene {
     });
     class1.on("pointerdown", () => {
       localStorage.setItem("playerClass", "class 1");
-      this.scene.start("Combat2");
+      this.scene.start("Combat");
     });
 
     const class2 = this.add
@@ -98,7 +98,7 @@ export class Start extends Phaser.Scene {
     });
     class2.on("pointerdown", () => {
       localStorage.setItem("playerClass", "class 2");
-      this.scene.start("Combat2");
+      this.scene.start("Combat");
     });
 
     const class3 = this.add
@@ -118,7 +118,7 @@ export class Start extends Phaser.Scene {
     });
     class3.on("pointerdown", () => {
       localStorage.setItem("playerClass", "class 3");
-      this.scene.start("Combat2");
+      this.scene.start("Combat");
     });
 
     const class4 = this.add
@@ -138,7 +138,7 @@ export class Start extends Phaser.Scene {
     });
     class4.on("pointerdown", () => {
       localStorage.setItem("playerClass", "class 4");
-      this.scene.start("Combat2");
+      this.scene.start("Combat");
     });
   }
 

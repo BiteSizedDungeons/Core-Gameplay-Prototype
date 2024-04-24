@@ -12,8 +12,8 @@ let autoMode = false;
 let skillInt = 0;
 
 export class Combat extends Phaser.Scene {
-  private autoText: Phaser.GameObjects.Text;
-  private autoArea: Phaser.GameObjects.Rectangle;
+  private autoText: Phaser.GameObjects.Text | null = null;
+  private autoArea: Phaser.GameObjects.Rectangle | null = null;
   player: Player | null;
   playerHealthText: Phaser.GameObjects.Text | null;
   skillDescription: Phaser.GameObjects.Text | null;
@@ -106,8 +106,8 @@ export class Combat extends Phaser.Scene {
     // auto mode
     if(autoMode)
     {
-      this.autoText.setText("Auto: ON");
-      this.autoArea.setActive(true).setVisible(true);
+      this.autoText!.setText("Auto: ON");
+      this.autoArea!.setActive(true).setVisible(true);
       
       // disable all spells
 
@@ -145,8 +145,8 @@ export class Combat extends Phaser.Scene {
     }
     else
     {
-      this.autoText.setText("Auto: OFF");
-      this.autoArea.setActive(false).setVisible(false);
+      this.autoText!.setText("Auto: OFF");
+      this.autoArea!.setActive(false).setVisible(false);
     }
     
 
@@ -513,7 +513,7 @@ export class Combat extends Phaser.Scene {
   }
 
   endGame() {
-    this.scene.start("End");
+    this.scene.start("post combat");
   }
 
   simulateAllies() {
