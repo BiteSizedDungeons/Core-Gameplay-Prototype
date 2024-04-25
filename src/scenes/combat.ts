@@ -41,7 +41,12 @@ export class Combat extends Phaser.Scene {
     this.allyActionStatus = [];
   }
 
-  preload() {}
+  preload() {
+    this.load.spritesheet("slash", "BSD_Slash.png", {
+      frameWidth: 1024,
+      frameHeight: 1024,
+    });
+  }
 
   create() {
     this.drawBackground();
@@ -78,21 +83,23 @@ export class Combat extends Phaser.Scene {
     this.initializeActions();
 
     // auto mode
-    var autoButton = this.add.rectangle(
-      120,
-      80,
-      200,
-      100,
-      0xFFC0CB
-    );
+    var autoButton = this.add.rectangle(120, 80, 200, 100, 0xffc0cb);
     autoButton.setInteractive();
-    autoButton.on('pointerup', () => {
+    autoButton.on("pointerup", () => {
       autoMode = !autoMode;
-  });
+    });
 
-    this.autoText = this.add.text(30, 70, 'Auto: OFF', { fontSize: '32px'});
+    this.autoText = this.add.text(30, 70, "Auto: OFF", { fontSize: "32px" });
     this.autoArea = this.add.rectangle(640, 695, 1280, 150, 0xff00ff, 0.5);
-    
+
+    this.anims.create({
+      key: "slashing",
+      frames: this.anims.generateFrameNumbers("slash", {
+        frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      }),
+      frameRate: 48,
+      repeat: 0,
+    });
   }
 
   update() {
@@ -104,34 +111,31 @@ export class Combat extends Phaser.Scene {
     this.drawUI();
 
     // auto mode
-    if(autoMode)
-    {
+    if (autoMode) {
       this.autoText!.setText("Auto: ON");
       this.autoArea!.setActive(true).setVisible(true);
-      
+
       // disable all spells
 
       // script
-      if (this.player?.canAct())
-      {
-        if(skillInt == 0)
-        {
-          skillList.get("attack")?.effect(this.player!, this.enemy as Character);
+      if (this.player?.canAct()) {
+        if (skillInt == 0) {
+          skillList
+            .get("attack")
+            ?.effect(this.player!, this.enemy as Character);
           skillInt = 1;
-        }
-        else if(skillInt == 1)
-        {
+        } else if (skillInt == 1) {
           skillList.get("heal")?.effect(this.player!, this.player as Character);
           skillInt = 2;
-        }
-        else if(skillInt == 2)
-        {
-          skillList.get("dual strikes")?.effect(this.player!, this.enemy as Character);
+        } else if (skillInt == 2) {
+          skillList
+            .get("dual strikes")
+            ?.effect(this.player!, this.enemy as Character);
           skillInt = 3;
-        }
-       else if(skillInt == 3)
-        {
-          skillList.get("empower")?.effect(this.player!, this.player as Character);
+        } else if (skillInt == 3) {
+          skillList
+            .get("empower")
+            ?.effect(this.player!, this.player as Character);
           skillInt = 0;
         }
         this.player!.resetAction();
@@ -140,15 +144,10 @@ export class Combat extends Phaser.Scene {
       //skillList.get("heal")?.effect(this.player!, this.player as Character);
       //skillList.get("dual strikes")?.effect(this.player!, this.enemy as Character);
       // skillList.get("empower")?.effect(this.player!, this.player as Character);
-
-      
-    }
-    else
-    {
+    } else {
       this.autoText!.setText("Auto: OFF");
       this.autoArea!.setActive(false).setVisible(false);
     }
-    
 
     if (this.enemy?.hasDebuff("Defense")) {
       this.enemyDefenseStatus!.alpha = 1;
@@ -559,6 +558,7 @@ export class Combat extends Phaser.Scene {
   }
 
   simulateHit() {
+    /*
     const randX = 200 * Math.random();
     const randY = 200 * Math.random();
     const hitMarker = this.add.text(
@@ -570,6 +570,21 @@ export class Combat extends Phaser.Scene {
 
     setTimeout(() => {
       hitMarker.destroy();
-    }, 400);
+    }, 400);*/
+
+    const slashAnim = this.add.sprite(
+      GAME_WIDTH / 2,
+      GAME_HEIGHT / 2 - 172,
+      "slash"
+    );
+    slashAnim.setScale(0.5);
+    slashAnim.play("slashing");
+    slashAnim.on(
+      Phaser.Animations.Events.ANIMATION_COMPLETE,
+      () => {
+        slashAnim.destroy();
+      },
+      this
+    );
   }
 }

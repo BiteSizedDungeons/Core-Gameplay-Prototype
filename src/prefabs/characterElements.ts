@@ -152,8 +152,8 @@ export class Enemy extends Character {
 
   constructor(scene: Phaser.Scene, maxHealth: number) {
     super(scene, GAME_WIDTH / 2, 60, 750, 30, maxHealth, 30, maxHealth);
-    const enemy = scene.add.image(GAME_WIDTH / 2, 224, "dragon");
-    enemy.setScale(0.5);
+    const enemy = scene.add.image(GAME_WIDTH / 2, 240, "dragon");
+    enemy.setScale(0.15);
 
     this.target = Math.floor(4 * Math.random());
     this.curAction = 0;

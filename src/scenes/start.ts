@@ -15,7 +15,7 @@ export class Start extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("dragon", "dragon.png");
+    this.load.image("dragon", "BSD_Dead_Dragon.png");
     this.load.image("dragonLogo", "8_bit_dragon.png");
     this.load.json("english", "en.json");
     this.load.json("not_english", "lang.json");
@@ -143,17 +143,17 @@ export class Start extends Phaser.Scene {
   }
 
   setLanguage() {
-    if(localStorage.getItem('language')!) { 
-      let get_lang = localStorage.getItem('language')!;
-      if(get_lang === 'not_english') {
-          this.language = this.not_english;
-      } else if(get_lang === 'korean') {
-          this.language = this.korean;
+    if (localStorage.getItem("language")!) {
+      let get_lang = localStorage.getItem("language")!;
+      if (get_lang === "not_english") {
+        this.language = this.not_english;
+      } else if (get_lang === "korean") {
+        this.language = this.korean;
       } else {
-          this.language = this.english;
+        this.language = this.english;
       }
     } else {
-    this.language = this.english;
+      this.language = this.english;
     }
   }
 
