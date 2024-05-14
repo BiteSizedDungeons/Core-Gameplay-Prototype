@@ -34,7 +34,7 @@ export class Options extends Phaser.Scene {
     english_settings.on('pointerout', () => { english_settings.setColor('#D3B02C'); });
     english_settings.on('pointerdown', () => { 
       localStorage.setItem('language', 'english');
-      this.scene.start('team');
+      this.scene.start('menu');
     });
 
     const korean_settings = this.add.text(center_x, center_y + 10, '한국어', { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
@@ -43,7 +43,7 @@ export class Options extends Phaser.Scene {
     korean_settings.on('pointerout', () => { korean_settings.setColor('#D3B02C'); });
     korean_settings.on('pointerdown', () => { 
       localStorage.setItem('language', 'korean');
-      this.scene.start('team');
+      this.scene.start('menu');
     });
     
     const other_settings = this.add.text(center_x, center_y - 40, 'Not English', { fontFamily: 'Silkscreen', color: '#D3B02C', fontSize: '35px'}).setOrigin(0.5);
@@ -52,7 +52,7 @@ export class Options extends Phaser.Scene {
     other_settings.on('pointerout', () => { other_settings.setColor('#D3B02C'); });
     other_settings.on('pointerdown', () => { 
       localStorage.setItem('language', 'not_english');
-      this.scene.start('team');
+      this.scene.start('menu');
     });
 
     this.tweens.add({ 

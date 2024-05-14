@@ -49,7 +49,7 @@ export class Action extends Phaser.GameObjects.Rectangle {
     );
 
     text.setColor("black");
-    text.setFontSize(32);
+    text.setFontSize(22);
     scene.add.existing(text);
   }
 

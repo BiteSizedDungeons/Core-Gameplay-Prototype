@@ -49,6 +49,11 @@ export class Combat extends Phaser.Scene {
   }
 
   create() {
+
+    gtag('event', 'combat', { 
+      'event_label': 'combat',
+    });
+
     this.drawBackground();
     this.initializeUI();
     this.initializePlayer();

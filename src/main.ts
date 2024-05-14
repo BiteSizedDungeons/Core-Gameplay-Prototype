@@ -1,5 +1,6 @@
 import "./style.css";
 import Phaser from "phaser";
+import * as WebFont from "webfontloader";
 
 // Load all of the scenes from ./scenes folder
 import { Menu } from "./scenes/menu";
@@ -16,7 +17,17 @@ let config = {
   type: Phaser.CANVAS,
   width: 1280,
   height: 720,
+  //scene: [Combat]
   scene: [Menu, Start, Options, Credits, Combat, Inventory],
 };
 
 export const BSD = new Phaser.Game(config);
+
+WebFont.load({
+  google: {
+    families: ['Silkscreen'],
+  },
+  active: function () {
+    BSD.scene.start("menu");
+  },
+});

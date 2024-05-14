@@ -19,6 +19,12 @@ export class Menu extends Phaser.Scene {
   }
 
   create() {
+
+    gtag('event', 'page_view', {
+      'page_title': 'Menu',
+      'page_location': 'https://bitesizeddungeons.github.io/Core-Gameplay-Prototype/',
+    });
+
     this.cameras.main.setBackgroundColor(0x141413); // sets background color change later
     const hover = this.sound.add("btnHov");
     this.english = this.cache.json.get("english");
@@ -137,3 +143,4 @@ export class Menu extends Phaser.Scene {
 
   update() {}
 }
+
