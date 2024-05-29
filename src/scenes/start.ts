@@ -80,28 +80,28 @@ export class Start extends Phaser.Scene {
         }
         console.log(JSON.stringify(player));
         // send player to server
-        // this.scene.start("Combat");
+        this.scene.start("Combat");
       }
     });
   }
 
   initText() {
     this.add
-    .text(50, 50, "Ability:", {
+    .text(50, 50, "Ability(4):", {
       fontFamily: "Silkscreen",
       color: "#D3B02C",
       fontSize: "30px",
     });
 
     this.add
-    .text(50, 300, "Weapon:", {
+    .text(50, 300, "Weapon(1):", {
       fontFamily: "Silkscreen",
       color: "#D3B02C",
       fontSize: "30px",
     });
 
     this.add
-    .text(50, 450, "Armor:", {
+    .text(50, 450, "Armor(1):", {
       fontFamily: "Silkscreen",
       color: "#D3B02C",
       fontSize: "30px",
@@ -109,24 +109,24 @@ export class Start extends Phaser.Scene {
   }
 
   initButton(hover:any) {
-    const ability1 = "a1",
-          ability2 = "a2",
-          ability3 = "a3",
-          ability4 = "a4",
-          ability5 = "a5",
-          ability6 = "a6",
-          ability7 = "a7",
-          ability8 = "a8";
+    const ability1 = "Attack",
+          ability2 = "Heal",
+          ability3 = "Empower",
+          ability4 = "Soul link",
+          ability5 = "Battle roar",
+          ability6 = "Power boost",
+          ability7 = "Dual strikes",
+          ability8 = "Charged strikes";
     
-    const weapon1 = "w1",
-          weapon2 = "w2",
-          weapon3 = "w3",
-          weapon4 = "w4";
+    const weapon1 = "Sword",
+          weapon2 = "Axe",
+          weapon3 = "Bow",
+          weapon4 = "Staff";
     
-    const armor1 = "m1",
-          armor2 = "m2",
-          armor3 = "m3",
-          armor4 = "m4";
+    const armor1 = "Light armor",
+          armor2 = "Heavy armor",
+          armor3 = "Chainmail",
+          armor4 = "Robe";
 
     this.createAbilityButton(ability1, 250, 150, hover);
     this.createAbilityButton(ability2, 500, 150, hover);
@@ -154,7 +154,7 @@ export class Start extends Phaser.Scene {
       .text(x, y, text, {
         fontFamily: FONT,
         color: TEXT_COLOR,
-        fontSize: "30px",
+        fontSize: "20px",
       })
       .setOrigin(0.5);
     class1.setInteractive();
@@ -185,7 +185,7 @@ export class Start extends Phaser.Scene {
       .text(x, y, text, {
         fontFamily: FONT,
         color: TEXT_COLOR,
-        fontSize: "30px",
+        fontSize: "20px",
       })
       .setOrigin(0.5);
     class1.setInteractive();
@@ -211,7 +211,7 @@ export class Start extends Phaser.Scene {
       .text(x, y, text, {
         fontFamily: FONT,
         color: TEXT_COLOR,
-        fontSize: "30px",
+        fontSize: "20px",
       })
       .setOrigin(0.5);
     class1.setInteractive();
@@ -227,7 +227,7 @@ export class Start extends Phaser.Scene {
 
       this.hideRect();
       this.showRect();
-      
+
       this.startOrNot();
     });
   }
@@ -236,37 +236,37 @@ export class Start extends Phaser.Scene {
     for(let i = 0; i < 8; i++) {
       this.abilityRect[i] = this.add.graphics();
     }
-    this.createRect(this.abilityRect[0], 175, 130);
-    this.createRect(this.abilityRect[1], 425, 130);
-    this.createRect(this.abilityRect[2], 675, 130);
-    this.createRect(this.abilityRect[3], 925, 130);
-    this.createRect(this.abilityRect[4], 175, 210);
-    this.createRect(this.abilityRect[5], 425, 210);
-    this.createRect(this.abilityRect[6], 675, 210);
-    this.createRect(this.abilityRect[7], 925, 210);
+    this.createRect(this.abilityRect[0], 140, 130);
+    this.createRect(this.abilityRect[1], 390, 130);
+    this.createRect(this.abilityRect[2], 640, 130);
+    this.createRect(this.abilityRect[3], 890, 130);
+    this.createRect(this.abilityRect[4], 140, 210);
+    this.createRect(this.abilityRect[5], 390, 210);
+    this.createRect(this.abilityRect[6], 640, 210);
+    this.createRect(this.abilityRect[7], 890, 210);
 
     for(let i = 0; i < 4; i++) {
       this.weaponRect[i] = this.add.graphics();
     }
-    this.createRect(this.weaponRect[0], 175, 380);
-    this.createRect(this.weaponRect[1], 425, 380);
-    this.createRect(this.weaponRect[2], 675, 380);
-    this.createRect(this.weaponRect[3], 925, 380);
+    this.createRect(this.weaponRect[0], 140, 380);
+    this.createRect(this.weaponRect[1], 390, 380);
+    this.createRect(this.weaponRect[2], 640, 380);
+    this.createRect(this.weaponRect[3], 890, 380);
 
     for(let i = 0; i < 4; i++) {
       this.armorRect[i] = this.add.graphics();
     }
-    this.createRect(this.armorRect[0], 175, 530);
-    this.createRect(this.armorRect[1], 425, 530);
-    this.createRect(this.armorRect[2], 675, 530);
-    this.createRect(this.armorRect[3], 925, 530); 
+    this.createRect(this.armorRect[0], 140, 530);
+    this.createRect(this.armorRect[1], 390, 530);
+    this.createRect(this.armorRect[2], 640, 530);
+    this.createRect(this.armorRect[3], 890, 530); 
 
     this.hideRect();
   }
 
   createRect(graphics:any, x:any, y:any) {
     graphics.lineStyle(1, 0xffffff, 1);
-    graphics.strokeRect(x, y, 150, 50);
+    graphics.strokeRect(x, y, 220, 50);
   }
 
   hideRect() {
@@ -284,24 +284,24 @@ export class Start extends Phaser.Scene {
   }
 
   showRect() {
-    const ability1 = "a1",
-          ability2 = "a2",
-          ability3 = "a3",
-          ability4 = "a4",
-          ability5 = "a5",
-          ability6 = "a6",
-          ability7 = "a7",
-          ability8 = "a8";
+    const ability1 = "Attack",
+          ability2 = "Heal",
+          ability3 = "Empower",
+          ability4 = "Soul link",
+          ability5 = "Battle roar",
+          ability6 = "Power boost",
+          ability7 = "Dual strikes",
+          ability8 = "Charged strikes";
 
-    const weapon1 = "w1",
-          weapon2 = "w2",
-          weapon3 = "w3",
-          weapon4 = "w4";
+    const weapon1 = "Sword",
+          weapon2 = "Axe",
+          weapon3 = "Bow",
+          weapon4 = "Staff";
 
-    const armor1 = "m1",
-          armor2 = "m2",
-          armor3 = "m3",
-          armor4 = "m4";
+    const armor1 = "Light armor",
+          armor2 = "Heavy armor",
+          armor3 = "Chainmail",
+          armor4 = "Robe";
 
     for(let i = 0; i < this.ability.length; i++){
       if(this.ability[i] == ability1)
