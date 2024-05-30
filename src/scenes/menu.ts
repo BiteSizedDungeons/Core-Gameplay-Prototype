@@ -118,6 +118,25 @@ export class Menu extends Phaser.Scene {
     credits_button.on("pointerdown", () => {
       this.scene.start("credits");
     });
+
+    const tutorial_button = this.add
+    .text(center_x, center_y + 300, this.language.tutorial, {
+      fontFamily: "Silkscreen",
+      color: "#D3B02C",
+      fontSize: "35px",
+    })
+    .setOrigin(0.5);
+    tutorial_button.setInteractive();
+    tutorial_button.on("pointerover", () => {
+      tutorial_button.setColor("#FFF");
+    hover.play();
+  });
+  tutorial_button.on("pointerout", () => {
+    tutorial_button.setColor("#D3B02C");
+  });
+  tutorial_button.on("pointerdown", () => {
+    this.scene.start("Tutorial");
+  });
   }
 
   setLanguage() {

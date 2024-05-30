@@ -1,6 +1,7 @@
 {
     "settings": "SETTINGS",
     "credits": "CREDITS",
+    "tutorial": "TUTORIAL",
     "join_room" : "JOIN ROOM",
     "team_name": "TEAM 24",
     "connecting": "Connecting to Server'",
