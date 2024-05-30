@@ -8,6 +8,7 @@ import { Options } from "./scenes/options";
 import { Credits } from "./scenes/credits";
 import { Combat } from "./scenes/combat";
 import { Inventory } from "./scenes/inventory";
+import { TestScene } from "./scenes/TestScene";
 // Scene key name should be file name lower case and spaced
 
 let config = {
@@ -16,7 +17,7 @@ let config = {
   type: Phaser.CANVAS,
   width: 1280,
   height: 720,
-  scene: [Menu, Start, Options, Credits, Combat, Inventory],
+  scene: [Menu, Start, Options, Credits, Combat, Inventory, TestScene],
 };
 
 export const BSD = new Phaser.Game(config);
