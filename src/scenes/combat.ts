@@ -50,6 +50,8 @@ export class Combat extends Phaser.Scene {
 
   create() {
 
+    this.cameras.main.fadeIn(500, 0, 0, 0);
+
     gtag('event', 'combat', { 
       'event_label': 'combat',
     });
