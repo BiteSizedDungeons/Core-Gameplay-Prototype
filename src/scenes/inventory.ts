@@ -206,6 +206,7 @@ export class Inventory extends Phaser.Scene {
   savePlayerEquipment() {
     SaveState.savePlayer(this.player);
     SaveState.saveInventory(this.inventory);
+    console.log("Inventory Saving")
     return;
   }
 
