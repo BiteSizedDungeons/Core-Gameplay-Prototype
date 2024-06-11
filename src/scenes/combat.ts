@@ -199,6 +199,7 @@ export class Combat extends Phaser.Scene {
       30,
       100
     );
+    this.player?.importJSONData(getPlayer());
     this.allies.push(this.player);
     this.player.setActRate(1);
 
@@ -258,17 +259,14 @@ export class Combat extends Phaser.Scene {
   }
 
   initializeActions() {
-    const playerData = getPlayer();
-    console.log("Combat")
-    console.log(playerData)
+    const playerData = this.player?.skills;
 
     for (let i = 0; i < 4; i++) {
-      console.log(playerData.abilities[i])
-      const curAbility  = buildSkill(
+      const curAbility = buildSkill(
         this,
         this.skillDescription!,
-        playerData.abilities[i],
-        GAME_WIDTH * (i + 1) / 5,
+        playerData![i],
+        (GAME_WIDTH * (i + 1)) / 5,
         GAME_HEIGHT - 60,
         this.player!,
         this.enemy!,
@@ -280,7 +278,7 @@ export class Combat extends Phaser.Scene {
           this.simulateHit();
         }
       });
-  
+
       this.player?.addAction(curAbility);
     }
 

@@ -1,4 +1,5 @@
 import { Action } from "./actions";
+import { BSD_Data } from "./data_manager";
 
 const GAME_WIDTH = 1280;
 // const GAME_HEIGHT = 720;
@@ -101,6 +102,9 @@ export class Character {
 }
 
 export class Player extends Character {
+  skills: string[];
+  armor: string;
+  weapon: string;
   actions: Action[];
 
   constructor(
@@ -115,6 +119,15 @@ export class Player extends Character {
   ) {
     super(scene, x, y, w, h1, v1, h2, v2);
     this.actions = [];
+    this.skills = [];
+    this.armor = "";
+    this.weapon = "";
+  }
+
+  importJSONData(json: BSD_Data) {
+    this.skills = json.abilities;
+    this.weapon = json.weapon;
+    this.armor = json.armor;
   }
 
   isAlive(): boolean {

@@ -162,3 +162,59 @@ class rest implements Skill {
 }
 
 skillList.set("rest", new rest());
+
+class soulLink implements Skill {
+  public name = "soul link";
+  public type = SkillType.TargetEnemy;
+  public description = "";
+  public actRate = 0.75;
+
+  effect(source: Player, target: Character) {
+    source.heal(20);
+    target.damage(0);
+  }
+}
+
+skillList.set("soul link", new soulLink());
+
+class battleRoar implements Skill {
+  public name = "battle roar";
+  public type = SkillType.TargetEnemy;
+  public description = "";
+  public actRate = 0.75;
+
+  effect(source: Player, target: Character) {
+    source.heal(20);
+    target.damage(0);
+  }
+}
+
+skillList.set("battle roar", new battleRoar());
+
+class powerBoost implements Skill {
+  public name = "power boost";
+  public type = SkillType.TargetEnemy;
+  public description = "";
+  public actRate = 0.75;
+
+  effect(source: Player, target: Character) {
+    source.heal(20);
+    target.damage(0);
+  }
+}
+
+skillList.set("power boost", new powerBoost());
+
+class chargedStrikes implements Skill {
+  public name = "charged strikes";
+  public type = SkillType.TargetEnemy;
+  public description = "";
+  public actRate = 0.75;
+
+  effect(source: Player, target: Character) {
+    source.heal(20);
+    target.damage(0);
+  }
+}
+
+skillList.set("charged strikes", new chargedStrikes());

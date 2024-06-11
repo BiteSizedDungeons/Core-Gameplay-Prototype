@@ -4,6 +4,8 @@ const invKey = "inventory";
 // Starting Player Loadout and Inventory
 const startingLoadout = {
   abilities: ["heal", "quick strike", "weakening blow", "rampage"],
+  weapon: "",
+  armor: "",
 };
 
 const startingInventory = {
@@ -21,6 +23,8 @@ const startingInventory = {
 
 export interface BSD_Data {
   abilities: string[];
+  weapon: string;
+  armor: string;
 }
 
 export function initializeSave() {
