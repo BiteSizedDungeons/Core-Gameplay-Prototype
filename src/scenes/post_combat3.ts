@@ -78,7 +78,7 @@ export class PostCombat3 extends Phaser.Scene {
       );
 
       this.add
-        .text(GAME_WIDTH / 2, GAME_HEIGHT / 2, "Level 1", {
+        .text(GAME_WIDTH / 2, GAME_HEIGHT / 2, "Level 4", {
           fontFamily: "Silkscreen",
           color: "#D3B02C",
           fontSize: "35px",
