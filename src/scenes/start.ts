@@ -119,7 +119,7 @@ export class Start extends Phaser.Scene {
           0,
           0,
           0,
-          (camera: any, progress: any) => {
+          (_camera: any, progress: any) => {
             if (progress === 1) {
               this.scene.start("Combat");
             }
