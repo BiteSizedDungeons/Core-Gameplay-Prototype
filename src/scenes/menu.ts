@@ -1,4 +1,5 @@
 import * as Phaser from "phaser";
+import { initializeSave } from "../prefabs/data_manager";
 
 export class Menu extends Phaser.Scene {
   english: any;
@@ -19,10 +20,12 @@ export class Menu extends Phaser.Scene {
   }
 
   create() {
+    initializeSave();
 
-    gtag('event', 'page_view', {
-      'page_title': 'Menu',
-      'page_location': 'https://bitesizeddungeons.github.io/Core-Gameplay-Prototype/',
+    gtag("event", "page_view", {
+      page_title: "Menu",
+      page_location:
+        "https://bitesizeddungeons.github.io/Core-Gameplay-Prototype/",
     });
 
     this.cameras.main.setBackgroundColor(0x141413); // sets background color change later
@@ -127,20 +130,19 @@ export class Menu extends Phaser.Scene {
   }
 
   setLanguage() {
-    if(localStorage.getItem('language')!) { 
-      let get_lang = localStorage.getItem('language')!;
-      if(get_lang === 'not_english') {
-          this.language = this.not_english;
-      } else if(get_lang === 'korean') {
-          this.language = this.korean;
+    if (localStorage.getItem("language")!) {
+      let get_lang = localStorage.getItem("language")!;
+      if (get_lang === "not_english") {
+        this.language = this.not_english;
+      } else if (get_lang === "korean") {
+        this.language = this.korean;
       } else {
-          this.language = this.english;
+        this.language = this.english;
       }
     } else {
-    this.language = this.english;
+      this.language = this.english;
     }
   }
 
   update() {}
 }
-

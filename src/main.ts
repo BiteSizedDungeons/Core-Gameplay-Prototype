@@ -28,6 +28,6 @@ WebFont.load({
     families: ['Silkscreen'],
   },
   active: function () {
-    BSD.scene.start("menu");
+    BSD.scene.start("Menu");
   },
 });

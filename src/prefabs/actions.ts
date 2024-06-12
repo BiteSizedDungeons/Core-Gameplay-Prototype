@@ -1,4 +1,4 @@
-import { Skill } from "./skills";
+import { Skill, skillList, SkillType } from "./skills";
 import { Player, Enemy, Character } from "./characterElements";
 
 const GAME_WIDTH = 1280;
@@ -230,4 +230,56 @@ export class AllAllyAction extends Action {
       }
     });
   }
+}
+
+export function buildSkill(
+  scene: Phaser.Scene,
+  description: Phaser.GameObjects.Text,
+  name: string,
+  x: number,
+  y: number,
+  player: Player,
+  enemy: Enemy,
+  party: Player[],
+  cd = 0
+): Action {
+  if (!skillList.has(name)) {
+    return new Action(
+      scene,
+      description,
+      x,
+      y,
+      player,
+      skillList.get("attack")!
+    );
+  }
+
+  const curSkill = skillList.get(name);
+  if (curSkill?.type == SkillType.TargetEnemy) {
+    return new TargetEnemyAction(
+      scene,
+      description,
+      x,
+      y,
+      player,
+      curSkill,
+      enemy,
+      cd
+    );
+  }
+
+  if (curSkill?.type == SkillType.TargetAlly) {
+    return new TargetAllyAction(
+      scene,
+      description,
+      x,
+      y,
+      player,
+      curSkill,
+      party,
+      cd
+    );
+  }
+
+  return new Action(scene, description, x, y, player, skillList.get("attack")!);
 }

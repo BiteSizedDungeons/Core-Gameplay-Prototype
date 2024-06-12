@@ -1,4 +1,5 @@
 import { Action } from "./actions";
+import { BSD_Data } from "./data_manager";
 
 const GAME_WIDTH = 1280;
 // const GAME_HEIGHT = 720;
@@ -11,6 +12,10 @@ export class Character {
   curBuff: Map<string, boolean>;
   curDebuff: Map<string, boolean>;
 
+  skills: string[];
+  armor: string;
+  weapon: string;
+
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -21,6 +26,10 @@ export class Character {
     h2: number,
     v2: number
   ) {
+    this.skills = [];
+    this.armor = "";
+    this.weapon = "";
+
     this.healthbar = new HealthBar(scene, x, y - h1 / 2, w, h1, v1);
     this.actionbar = new ActionBar(scene, x, y + h2 / 2, w, h2, v2);
     this.curBuff = new Map();
@@ -30,6 +39,12 @@ export class Character {
       this.curBuff.set(type, false);
       this.curDebuff.set(type, false);
     }
+  }
+
+  importJSONData(json: BSD_Data) {
+    this.skills = json.abilities;
+    this.weapon = json.weapon;
+    this.armor = json.armor;
   }
 
   health(): number {

@@ -2,8 +2,9 @@
  */
 
 import { Enemy, Player, Character } from "../prefabs/characterElements";
-import { TargetAllyAction, TargetEnemyAction } from "../prefabs/actions";
+import { buildSkill } from "../prefabs/actions";
 import { skillList } from "../prefabs/skills";
+import { getPlayer } from "../prefabs/data_manager";
 
 const GAME_WIDTH = 1280;
 const GAME_HEIGHT = 720;
@@ -49,11 +50,10 @@ export class Combat extends Phaser.Scene {
   }
 
   create() {
-
     this.cameras.main.fadeIn(500, 0, 0, 0);
 
-    gtag('event', 'combat', { 
-      'event_label': 'combat',
+    gtag("event", "combat", {
+      event_label: "combat",
     });
 
     this.drawBackground();
@@ -146,11 +146,7 @@ export class Combat extends Phaser.Scene {
           skillInt = 0;
         }
         this.player!.resetAction();
-        //console.log("auto attack");
       }
-      //skillList.get("heal")?.effect(this.player!, this.player as Character);
-      //skillList.get("dual strikes")?.effect(this.player!, this.enemy as Character);
-      // skillList.get("empower")?.effect(this.player!, this.player as Character);
     } else {
       this.autoText!.setText("Auto: OFF");
       this.autoArea!.setActive(false).setVisible(false);
@@ -199,6 +195,7 @@ export class Combat extends Phaser.Scene {
       30,
       100
     );
+    this.player?.importJSONData(getPlayer());
     this.allies.push(this.player);
     this.player.setActRate(1);
 
@@ -255,38 +252,32 @@ export class Combat extends Phaser.Scene {
       action.alpha = 0;
       this.allyActionStatus.push(action);
     }
-
-    console.log(this.allies.length);
   }
 
   initializeActions() {
-    const playBasicAttack = new TargetEnemyAction(
-      this,
-      this.skillDescription!,
-      GAME_WIDTH / 5,
-      GAME_HEIGHT - 60,
-      this.player!,
-      skillList.get(`attack`)!,
-      this.enemy!
-    );
+    const playerData = this.player?.skills;
+    console.log(this.player?.weapon)
+    console.log(this.player?.armor)
 
-    playBasicAttack.on("pointerdown", () => {
-      if (playBasicAttack.isUsable()) {
-        this.simulateHit();
-      }
-    });
+    for (let i = 0; i < 4; i++) {
+      const curAbility = buildSkill(
+        this,
+        this.skillDescription!,
+        playerData![i],
+        (GAME_WIDTH * (i + 1)) / 5,
+        GAME_HEIGHT - 60,
+        this.player!,
+        this.enemy!,
+        this.allies
+      );
 
-    this.player?.addAction(playBasicAttack);
+      curAbility.on("pointerdown", () => {
+        if (curAbility.isUsable()) {
+          this.simulateHit();
+        }
+      });
 
-    const curClass = localStorage.getItem("playerClass")!;
-    if (curClass == "class 2") {
-      this.initBruiser();
-    } else if (curClass == "class 3") {
-      this.initStriker();
-    } else if (curClass == "class 4") {
-      this.initSupporter();
-    } else {
-      this.initAllRounder();
+      this.player?.addAction(curAbility);
     }
 
     this.dimUI = this.add.rectangle(
@@ -297,178 +288,6 @@ export class Combat extends Phaser.Scene {
       0x000000,
       0.2
     );
-  }
-
-  initAllRounder() {
-    this.player?.addAction(
-      new TargetAllyAction(
-        this,
-        this.skillDescription!,
-        (GAME_WIDTH * 2) / 5,
-        GAME_HEIGHT - 60,
-        this.player,
-        skillList.get(`heal`)!,
-        this.allies,
-        2
-      )
-    );
-
-    this.addDualStrikes();
-    this.addEmpower();
-  }
-
-  initBruiser() {
-    const playDrainBlow = new TargetEnemyAction(
-      this,
-      this.skillDescription!,
-      (GAME_WIDTH * 2) / 5,
-      GAME_HEIGHT - 60,
-      this.player!,
-      skillList.get(`draining blow`)!,
-      this.enemy!,
-      4
-    );
-
-    playDrainBlow.on("pointerdown", () => {
-      if (playDrainBlow.isUsable()) {
-        this.simulateHit();
-      }
-    });
-
-    const playArmorPierce = new TargetEnemyAction(
-      this,
-      this.skillDescription!,
-      (GAME_WIDTH * 3) / 5,
-      GAME_HEIGHT - 60,
-      this.player!,
-      skillList.get(`armor pierce`)!,
-      this.enemy!,
-      4
-    );
-
-    playArmorPierce.on("pointerdown", () => {
-      if (playArmorPierce.isUsable()) {
-        this.simulateHit();
-      }
-    });
-
-    this.player?.addAction(playDrainBlow);
-    this.player?.addAction(playArmorPierce);
-    this.addRampage();
-  }
-
-  initStriker() {
-    this.player?.addAction(
-      new TargetEnemyAction(
-        this,
-        this.skillDescription!,
-        (GAME_WIDTH * 2) / 5,
-        GAME_HEIGHT - 60,
-        this.player,
-        skillList.get(`rest`)!,
-        this.enemy!,
-        2
-      )
-    );
-
-    this.addDualStrikes();
-    this.addRampage();
-  }
-
-  initSupporter() {
-    const playWeakening = new TargetEnemyAction(
-      this,
-      this.skillDescription!,
-      (GAME_WIDTH * 2) / 5,
-      GAME_HEIGHT - 60,
-      this.player!,
-      skillList.get(`weakening blow`)!,
-      this.enemy!,
-      4
-    );
-
-    playWeakening.on("pointerdown", () => {
-      if (playWeakening.isUsable()) {
-        this.simulateHit();
-      }
-    });
-
-    this.player?.addAction(playWeakening);
-
-    this.addDualStrikes();
-    this.addEmpower();
-  }
-
-  addEmpower() {
-    this.player?.addAction(
-      new TargetAllyAction(
-        this,
-        this.skillDescription!,
-        (GAME_WIDTH * 4) / 5,
-        GAME_HEIGHT - 60,
-        this.player,
-        skillList.get(`empower`)!,
-        this.allies,
-        7
-      )
-    );
-  }
-
-  addDualStrikes() {
-    const playDualStrikes = new TargetEnemyAction(
-      this,
-      this.skillDescription!,
-      (GAME_WIDTH * 3) / 5,
-      GAME_HEIGHT - 60,
-      this.player!,
-      skillList.get(`dual strikes`)!,
-      this.enemy!,
-      5
-    );
-
-    playDualStrikes.on("pointerdown", () => {
-      if (playDualStrikes.isUsable()) {
-        this.simulateHit();
-        setTimeout(() => {
-          this.simulateHit();
-        }, 200);
-      }
-    });
-
-    this.player?.addAction(playDualStrikes);
-  }
-
-  addRampage() {
-    const playRampage = new TargetEnemyAction(
-      this,
-      this.skillDescription!,
-      (4 * GAME_WIDTH) / 5,
-      GAME_HEIGHT - 60,
-      this.player!,
-      skillList.get(`rampage`)!,
-      this.enemy!,
-      7
-    );
-
-    playRampage.on("pointerdown", () => {
-      if (playRampage.isUsable()) {
-        this.simulateHit();
-        setTimeout(() => {
-          this.simulateHit();
-        }, 100);
-        setTimeout(() => {
-          this.simulateHit();
-        }, 200);
-        setTimeout(() => {
-          this.simulateHit();
-        }, 300);
-        setTimeout(() => {
-          this.simulateHit();
-        }, 400);
-      }
-    });
-
-    this.player?.addAction(playRampage);
   }
 
   drawBackground() {
@@ -565,20 +384,6 @@ export class Combat extends Phaser.Scene {
   }
 
   simulateHit() {
-    /*
-    const randX = 200 * Math.random();
-    const randY = 200 * Math.random();
-    const hitMarker = this.add.text(
-      randX + GAME_WIDTH / 2 - 100,
-      randY + 224 - 100,
-      "👊"
-    );
-    hitMarker.setFontSize("60px");
-
-    setTimeout(() => {
-      hitMarker.destroy();
-    }, 400);*/
-
     const slashAnim = this.add.sprite(
       GAME_WIDTH / 2,
       GAME_HEIGHT / 2 - 172,
