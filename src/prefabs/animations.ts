@@ -31,6 +31,6 @@ function playSlash(scene: Phaser.Scene) {
   );
 }
 
-export function animationHandler(scene: Phaser.Scene, name: string) {
+export function animationHandler(scene: Phaser.Scene, _name: string) {
   playSlash(scene);
 }

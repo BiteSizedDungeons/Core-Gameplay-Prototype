@@ -43,8 +43,6 @@ export class Character {
 
   importJSONData(json: BSD_Data) {
     this.skills = json.abilities;
-    this.weapon = json.weapon;
-    this.armor = json.armor;
   }
 
   health(): number {
