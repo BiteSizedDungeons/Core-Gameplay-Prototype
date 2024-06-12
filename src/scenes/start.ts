@@ -90,9 +90,7 @@ export class Start extends Phaser.Scene {
             this.ability[1].toLowerCase(),
             this.ability[2].toLowerCase(),
             this.ability[3].toLowerCase(),
-          ],
-          weapon: this.weapon[0],
-          armor: this.armor[0],
+          ]
         };
         console.log(JSON.stringify(player));
         savePlayer(player);
