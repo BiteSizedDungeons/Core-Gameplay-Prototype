@@ -11,13 +11,13 @@ const GAME_HEIGHT = 720;
 const TEXT_COLOR = "#D3B02C";
 const FONT = "Silkscreen";
 
-export class PostCombat1 extends Phaser.Scene {
+export class PostCombat3 extends Phaser.Scene {
   isStart: boolean = false;
   Player1: boolean = false;
   Player2: boolean = false;
   pRect: Phaser.GameObjects.Graphics[];
   constructor() {
-    super("post combat1");
+    super("post combat3");
     this.pRect = [];
   }
 
@@ -93,7 +93,7 @@ export class PostCombat1 extends Phaser.Scene {
         (_camera: any, progress: any) => {
           if (progress === 1) {
             if(this.isStart)
-            this.scene.start("Combat2");
+            this.scene.start("Combat4");
           }
         }
       );

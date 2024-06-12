@@ -131,19 +131,19 @@ export class Start extends Phaser.Scene {
   }
 
   initText() {
-    this.add.text(50, 50, "Ability(4):", {
+    this.add.text(50, 50, "🪄Ability(4):", {
       fontFamily: "Silkscreen",
       color: "#D3B02C",
       fontSize: "30px",
     });
 
-    this.add.text(50, 300, "Weapon(1):", {
+    this.add.text(50, 300, "🗡️Weapon(1):", {
       fontFamily: "Silkscreen",
       color: "#D3B02C",
       fontSize: "30px",
     });
 
-    this.add.text(50, 450, "Armor(1):", {
+    this.add.text(50, 450, "🛡️Armor(1):", {
       fontFamily: "Silkscreen",
       color: "#D3B02C",
       fontSize: "30px",

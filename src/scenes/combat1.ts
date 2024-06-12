@@ -332,7 +332,7 @@ export class Combat1 extends Phaser.Scene {
   }
 
   endGame() {
-    this.scene.start("post combat");
+    this.scene.start("post combat1");
   }
 
   simulateAllies() {
