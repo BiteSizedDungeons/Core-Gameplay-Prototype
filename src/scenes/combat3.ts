@@ -1,7 +1,7 @@
 /* Combat Scene: Main combat scene where player faces off against an enemy
  */
 
-import { Enemy, Player, Character } from "../prefabs/characterElements";
+import { Enemy3, Player, Character } from "../prefabs/characterElements";
 import { buildSkill } from "../prefabs/actions";
 import { skillList } from "../prefabs/skills";
 import { getPlayer } from "../prefabs/data_manager";
@@ -13,14 +13,14 @@ const GAME_HEIGHT = 720;
 let autoMode = false;
 let skillInt = 0;
 
-export class Combat extends Phaser.Scene {
+export class Combat3 extends Phaser.Scene {
   private autoText: Phaser.GameObjects.Text | null = null;
   private autoArea: Phaser.GameObjects.Rectangle | null = null;
   player: Player | null;
   playerHealthText: Phaser.GameObjects.Text | null;
   skillDescription: Phaser.GameObjects.Text | null;
   allies: Player[];
-  enemy: Enemy | null;
+  enemy: Enemy3 | null;
 
   dimUI: Phaser.GameObjects.Rectangle | null;
   enemyDefenseStatus: Phaser.GameObjects.Text | null;
@@ -29,7 +29,7 @@ export class Combat extends Phaser.Scene {
   allyActionStatus: Phaser.GameObjects.Text[];
 
   constructor() {
-    super("Combat");
+    super("Combat3");
 
     this.player = null;
     this.playerHealthText = null;
@@ -53,15 +53,15 @@ export class Combat extends Phaser.Scene {
   create() {
     this.cameras.main.fadeIn(500, 0, 0, 0);
 
-    gtag("event", "combat", {
-      event_label: "combat",
+    gtag("event", "combat3", {
+      event_label: "combat3",
     });
 
     this.drawBackground();
     this.initializeUI();
     this.initializePlayer();
     this.initializeAllies();
-    this.enemy = new Enemy(this, 2000);
+    this.enemy = new Enemy3(this, 1500);
 
     const status = this.add.text(GAME_WIDTH / 2 + 20, 92, "Status:");
     status.setFontSize("28px");
