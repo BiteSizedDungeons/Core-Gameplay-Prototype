@@ -2,11 +2,7 @@
  */
 
 import { Enemy, Player, Character } from "../prefabs/characterElements";
-import {
-  TargetAllyAction,
-  TargetEnemyAction,
-  buildSkill,
-} from "../prefabs/actions";
+import { buildSkill } from "../prefabs/actions";
 import { skillList } from "../prefabs/skills";
 import { getPlayer } from "../prefabs/data_manager";
 
@@ -260,6 +256,8 @@ export class Combat extends Phaser.Scene {
 
   initializeActions() {
     const playerData = this.player?.skills;
+    console.log(this.player?.weapon)
+    console.log(this.player?.armor)
 
     for (let i = 0; i < 4; i++) {
       const curAbility = buildSkill(
