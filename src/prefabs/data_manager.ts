@@ -23,8 +23,6 @@ const startingInventory = {
 
 export interface BSD_Data {
   abilities: string[];
-  weapon: string;
-  armor: string;
 }
 
 export function initializeSave() {
