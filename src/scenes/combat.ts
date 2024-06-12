@@ -5,6 +5,7 @@ import { Enemy, Player, Character } from "../prefabs/characterElements";
 import { buildSkill } from "../prefabs/actions";
 import { skillList } from "../prefabs/skills";
 import { getPlayer } from "../prefabs/data_manager";
+import { buildAnimations, animationHandler } from "../prefabs/animations";
 
 const GAME_WIDTH = 1280;
 const GAME_HEIGHT = 720;
@@ -99,14 +100,7 @@ export class Combat extends Phaser.Scene {
     this.autoText = this.add.text(30, 70, "Auto: OFF", { fontSize: "32px" });
     this.autoArea = this.add.rectangle(640, 695, 1280, 150, 0xff00ff, 0.5);
 
-    this.anims.create({
-      key: "slashing",
-      frames: this.anims.generateFrameNumbers("slash", {
-        frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-      }),
-      frameRate: 48,
-      repeat: 0,
-    });
+    buildAnimations(this);
   }
 
   update() {
@@ -195,7 +189,6 @@ export class Combat extends Phaser.Scene {
       30,
       100
     );
-    this.player?.importJSONData(getPlayer());
     this.allies.push(this.player);
     this.player.setActRate(1);
 
@@ -255,15 +248,16 @@ export class Combat extends Phaser.Scene {
   }
 
   initializeActions() {
-    const playerData = this.player?.skills;
-    console.log(this.player?.weapon)
-    console.log(this.player?.armor)
+    const playerData = getPlayer();
+    console.log("Combat");
+    console.log(playerData);
 
     for (let i = 0; i < 4; i++) {
+      console.log(playerData.abilities[i]);
       const curAbility = buildSkill(
         this,
         this.skillDescription!,
-        playerData![i],
+        playerData.abilities[i],
         (GAME_WIDTH * (i + 1)) / 5,
         GAME_HEIGHT - 60,
         this.player!,
@@ -273,7 +267,7 @@ export class Combat extends Phaser.Scene {
 
       curAbility.on("pointerdown", () => {
         if (curAbility.isUsable()) {
-          this.simulateHit();
+          animationHandler(this, curAbility.skill.name);
         }
       });
 
@@ -381,22 +375,5 @@ export class Combat extends Phaser.Scene {
 
       ally.actionbar.update();
     }
-  }
-
-  simulateHit() {
-    const slashAnim = this.add.sprite(
-      GAME_WIDTH / 2,
-      GAME_HEIGHT / 2 - 172,
-      "slash"
-    );
-    slashAnim.setScale(0.5);
-    slashAnim.play("slashing");
-    slashAnim.on(
-      Phaser.Animations.Events.ANIMATION_COMPLETE,
-      () => {
-        slashAnim.destroy();
-      },
-      this
-    );
   }
 }

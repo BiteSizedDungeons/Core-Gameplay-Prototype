@@ -34,6 +34,11 @@ export class Start extends Phaser.Scene {
     this.load.json("not_english", "lang.json");
     this.load.json("korean", "kr.json");
     this.load.audio("btnHov", "btn_hover.mp3");
+
+    this.load.spritesheet("slash", "BSD_Slash.png", {
+      frameWidth: 1024,
+      frameHeight: 1024,
+    });
   }
 
   create() {
