@@ -1,5 +1,6 @@
 import { Skill, skillList, SkillType } from "./skills";
 import { Player, Enemy, Character } from "./characterElements";
+import { playHeal } from "./animations";
 
 const GAME_WIDTH = 1280;
 const GAME_HEIGHT = 720;
@@ -183,8 +184,10 @@ function addAllyTargeting(
   // Adds the functionality to the parsed function
   for (let i = 0; i < action.party.length; i++) {
     action.alliesHitbox[i + 1].setInteractive();
+    const box = action.alliesHitbox[i + 1];
     action.alliesHitbox[i + 1].on("pointerdown", () => {
       fn(source, action.party[i]!);
+      playHeal(scene, box.x, box.y);
       action.turnsPassed = 0;
       action.player!.setActRate(action.skill.actRate);
       action.player.passTurns();

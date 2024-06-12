@@ -39,6 +39,16 @@ export class Start extends Phaser.Scene {
       frameWidth: 1024,
       frameHeight: 1024,
     });
+
+    this.load.spritesheet("heal", "Heal.png", {
+      frameWidth: 1024,
+      frameHeight: 1024,
+    });
+
+    this.load.spritesheet("multi slash", "Mult_Slash.png", {
+      frameWidth: 1024,
+      frameHeight: 1024,
+    });
   }
 
   create() {
