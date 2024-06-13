@@ -389,3 +389,356 @@ export class ActionBar extends HealthBar {
     }
   }
 }
+
+
+
+export class Enemy1 extends Character {
+  target: number;
+  curAction: number;
+  targetText: Phaser.GameObjects.Text;
+  enemyLabel: Phaser.GameObjects.Text;
+
+  constructor(scene: Phaser.Scene, maxHealth: number) {
+    super(scene, GAME_WIDTH / 2, 60, 750, 30, maxHealth, 30, maxHealth);
+    const enemy = scene.add.image(GAME_WIDTH / 2, 240, "slime");
+    enemy.setScale(0.15);
+
+    this.target = Math.floor(4 * Math.random());
+    this.curAction = 0;
+
+    this.targetText = scene.add.text(
+      GAME_WIDTH / 2 - 348,
+      70 - 8,
+      `Intent: Claw Attack   Target: Player ${(this.target + 1).toString()}`,
+      { font: "Ariel" }
+    );
+
+    this.targetText.setFontSize(28);
+    this.targetText.setColor("Black");
+    this.targetText.setFontStyle("bold");
+
+    this.enemyLabel = scene.add.text(
+      GAME_WIDTH / 2 - 348,
+      40 - 8,
+      `Enemy: Slime`,
+      { font: "Ariel" }
+    );
+
+    this.enemyLabel.setFontSize(28);
+    this.enemyLabel.setColor("Black");
+    this.enemyLabel.setFontStyle("bold");
+  }
+
+  selectTarget(allyParty: Player[], target: number = -1) {
+    if (target > -1) {
+      this.target = target;
+      return;
+    }
+
+    let numAlliesDead = 0;
+    for (const allies of allyParty) {
+      if (!allies.isAlive()) {
+        numAlliesDead += 1;
+      }
+    }
+
+    if (numAlliesDead >= allyParty.length) {
+      return;
+    }
+
+    this.target = Math.floor(Math.random() * 4);
+    while (!allyParty[this.target].isAlive()) {
+      this.target = Math.floor(Math.random() * 4);
+    }
+
+    const selector = Math.floor(Math.random() * 10);
+    if (selector < 2) {
+      this.curAction = 1;
+    } else if (selector < 3) {
+      this.curAction = 2;
+    } else {
+      this.curAction = 0;
+    }
+  }
+
+  updateAction(allyParty: Player[]) {
+    this.actionbar.decreaseBar(5);
+
+    if (this.curAction == 0) {
+      if (this.actionbar.getValue() <= 0) {
+        if (this.hasDebuff("Attack")) {
+          allyParty[this.target].damage(10);
+        } else {
+          allyParty[this.target].damage(20);
+        }
+        this.actionbar.resetBar();
+        this.selectTarget(allyParty);
+      }
+    } else if (this.curAction == 1) {
+      if (this.actionbar.getValue() <= 0) {
+        for (const ally of allyParty) {
+          ally.damage(50);
+        }
+        this.actionbar.resetBar();
+        this.selectTarget(allyParty);
+      }
+    } else if (this.curAction == 2) {
+      if (this.actionbar.getValue() <= 0) {
+        if (this.hasDebuff("Attack")) {
+          allyParty[this.target].damage(40);
+        } else {
+          allyParty[this.target].damage(80);
+        }
+        this.actionbar.resetBar();
+        this.selectTarget(allyParty);
+      }
+    }
+  }
+
+  draw() {
+    super.draw();
+    let intent = "Claw Attack";
+    if (this.curAction == 1) {
+      intent = "Firebreath";
+    } else if (this.curAction == 2) {
+      intent = "Rip & Tear";
+    }
+    this.targetText.setText(
+      `Intent: ${intent}   Target: Player ${(this.target + 1).toString()}`
+    );
+  }
+}
+
+export class Enemy2 extends Character {
+  target: number;
+  curAction: number;
+  targetText: Phaser.GameObjects.Text;
+  enemyLabel: Phaser.GameObjects.Text;
+
+  constructor(scene: Phaser.Scene, maxHealth: number) {
+    super(scene, GAME_WIDTH / 2, 60, 750, 30, maxHealth, 30, maxHealth);
+    const enemy = scene.add.image(GAME_WIDTH / 2, 240, "wolf");
+    enemy.setScale(0.15);
+
+    this.target = Math.floor(4 * Math.random());
+    this.curAction = 0;
+
+    this.targetText = scene.add.text(
+      GAME_WIDTH / 2 - 348,
+      70 - 8,
+      `Intent: Claw Attack   Target: Player ${(this.target + 1).toString()}`,
+      { font: "Ariel" }
+    );
+
+    this.targetText.setFontSize(28);
+    this.targetText.setColor("Black");
+    this.targetText.setFontStyle("bold");
+
+    this.enemyLabel = scene.add.text(
+      GAME_WIDTH / 2 - 348,
+      40 - 8,
+      `Enemy: Wolf`,
+      { font: "Ariel" }
+    );
+
+    this.enemyLabel.setFontSize(28);
+    this.enemyLabel.setColor("Black");
+    this.enemyLabel.setFontStyle("bold");
+  }
+
+  selectTarget(allyParty: Player[], target: number = -1) {
+    if (target > -1) {
+      this.target = target;
+      return;
+    }
+
+    let numAlliesDead = 0;
+    for (const allies of allyParty) {
+      if (!allies.isAlive()) {
+        numAlliesDead += 1;
+      }
+    }
+
+    if (numAlliesDead >= allyParty.length) {
+      return;
+    }
+
+    this.target = Math.floor(Math.random() * 4);
+    while (!allyParty[this.target].isAlive()) {
+      this.target = Math.floor(Math.random() * 4);
+    }
+
+    const selector = Math.floor(Math.random() * 10);
+    if (selector < 2) {
+      this.curAction = 1;
+    } else if (selector < 3) {
+      this.curAction = 2;
+    } else {
+      this.curAction = 0;
+    }
+  }
+
+  updateAction(allyParty: Player[]) {
+    this.actionbar.decreaseBar(5);
+
+    if (this.curAction == 0) {
+      if (this.actionbar.getValue() <= 0) {
+        if (this.hasDebuff("Attack")) {
+          allyParty[this.target].damage(10);
+        } else {
+          allyParty[this.target].damage(20);
+        }
+        this.actionbar.resetBar();
+        this.selectTarget(allyParty);
+      }
+    } else if (this.curAction == 1) {
+      if (this.actionbar.getValue() <= 0) {
+        for (const ally of allyParty) {
+          ally.damage(50);
+        }
+        this.actionbar.resetBar();
+        this.selectTarget(allyParty);
+      }
+    } else if (this.curAction == 2) {
+      if (this.actionbar.getValue() <= 0) {
+        if (this.hasDebuff("Attack")) {
+          allyParty[this.target].damage(40);
+        } else {
+          allyParty[this.target].damage(80);
+        }
+        this.actionbar.resetBar();
+        this.selectTarget(allyParty);
+      }
+    }
+  }
+
+  draw() {
+    super.draw();
+    let intent = "Claw Attack";
+    if (this.curAction == 1) {
+      intent = "Firebreath";
+    } else if (this.curAction == 2) {
+      intent = "Rip & Tear";
+    }
+    this.targetText.setText(
+      `Intent: ${intent}   Target: Player ${(this.target + 1).toString()}`
+    );
+  }
+}
+
+export class Enemy3 extends Character {
+  target: number;
+  curAction: number;
+  targetText: Phaser.GameObjects.Text;
+  enemyLabel: Phaser.GameObjects.Text;
+
+  constructor(scene: Phaser.Scene, maxHealth: number) {
+    super(scene, GAME_WIDTH / 2, 60, 750, 30, maxHealth, 30, maxHealth);
+    const enemy = scene.add.image(GAME_WIDTH / 2, 240, "griffin");
+    enemy.setScale(0.15);
+
+    this.target = Math.floor(4 * Math.random());
+    this.curAction = 0;
+
+    this.targetText = scene.add.text(
+      GAME_WIDTH / 2 - 348,
+      70 - 8,
+      `Intent: Claw Attack   Target: Player ${(this.target + 1).toString()}`,
+      { font: "Ariel" }
+    );
+
+    this.targetText.setFontSize(28);
+    this.targetText.setColor("Black");
+    this.targetText.setFontStyle("bold");
+
+    this.enemyLabel = scene.add.text(
+      GAME_WIDTH / 2 - 348,
+      40 - 8,
+      `Enemy: Griffin`,
+      { font: "Ariel" }
+    );
+
+    this.enemyLabel.setFontSize(28);
+    this.enemyLabel.setColor("Black");
+    this.enemyLabel.setFontStyle("bold");
+  }
+
+  selectTarget(allyParty: Player[], target: number = -1) {
+    if (target > -1) {
+      this.target = target;
+      return;
+    }
+
+    let numAlliesDead = 0;
+    for (const allies of allyParty) {
+      if (!allies.isAlive()) {
+        numAlliesDead += 1;
+      }
+    }
+
+    if (numAlliesDead >= allyParty.length) {
+      return;
+    }
+
+    this.target = Math.floor(Math.random() * 4);
+    while (!allyParty[this.target].isAlive()) {
+      this.target = Math.floor(Math.random() * 4);
+    }
+
+    const selector = Math.floor(Math.random() * 10);
+    if (selector < 2) {
+      this.curAction = 1;
+    } else if (selector < 3) {
+      this.curAction = 2;
+    } else {
+      this.curAction = 0;
+    }
+  }
+
+  updateAction(allyParty: Player[]) {
+    this.actionbar.decreaseBar(5);
+
+    if (this.curAction == 0) {
+      if (this.actionbar.getValue() <= 0) {
+        if (this.hasDebuff("Attack")) {
+          allyParty[this.target].damage(10);
+        } else {
+          allyParty[this.target].damage(20);
+        }
+        this.actionbar.resetBar();
+        this.selectTarget(allyParty);
+      }
+    } else if (this.curAction == 1) {
+      if (this.actionbar.getValue() <= 0) {
+        for (const ally of allyParty) {
+          ally.damage(50);
+        }
+        this.actionbar.resetBar();
+        this.selectTarget(allyParty);
+      }
+    } else if (this.curAction == 2) {
+      if (this.actionbar.getValue() <= 0) {
+        if (this.hasDebuff("Attack")) {
+          allyParty[this.target].damage(40);
+        } else {
+          allyParty[this.target].damage(80);
+        }
+        this.actionbar.resetBar();
+        this.selectTarget(allyParty);
+      }
+    }
+  }
+
+  draw() {
+    super.draw();
+    let intent = "Claw Attack";
+    if (this.curAction == 1) {
+      intent = "Firebreath";
+    } else if (this.curAction == 2) {
+      intent = "Rip & Tear";
+    }
+    this.targetText.setText(
+      `Intent: ${intent}   Target: Player ${(this.target + 1).toString()}`
+    );
+  }
+}

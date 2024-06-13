@@ -88,6 +88,7 @@ export class Menu extends Phaser.Scene {
     });
     join_button.on("pointerdown", () => {
       this.scene.start("Start");
+      
     });
 
     const settings_button = this.add

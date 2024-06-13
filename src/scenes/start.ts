@@ -29,6 +29,9 @@ export class Start extends Phaser.Scene {
 
   preload() {
     this.load.image("dragon", "BSD_Dead_Dragon.png");
+    this.load.image("slime", "BSD_Slime.png");
+    this.load.image("wolf", "BSD_Wolf.png");
+    this.load.image("griffin", "BSD_Griffin.png");
     this.load.image("dragonLogo", "8_bit_dragon.png");
     this.load.json("english", "en.json");
     this.load.json("not_english", "lang.json");
@@ -129,7 +132,7 @@ export class Start extends Phaser.Scene {
           0,
           (_camera: any, progress: any) => {
             if (progress === 1) {
-              this.scene.start("Combat");
+              this.scene.start("Combat1");
             }
           }
         );
@@ -138,19 +141,19 @@ export class Start extends Phaser.Scene {
   }
 
   initText() {
-    this.add.text(50, 50, "Ability(4):", {
+    this.add.text(50, 50, "🪄Ability(4):", {
       fontFamily: "Silkscreen",
       color: "#D3B02C",
       fontSize: "30px",
     });
 
-    this.add.text(50, 300, "Weapon(1):", {
+    this.add.text(50, 300, "🗡️Weapon(1):", {
       fontFamily: "Silkscreen",
       color: "#D3B02C",
       fontSize: "30px",
     });
 
-    this.add.text(50, 450, "Armor(1):", {
+    this.add.text(50, 450, "🛡️Armor(1):", {
       fontFamily: "Silkscreen",
       color: "#D3B02C",
       fontSize: "30px",
