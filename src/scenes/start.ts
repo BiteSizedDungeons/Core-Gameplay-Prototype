@@ -100,9 +100,7 @@ export class Start extends Phaser.Scene {
             this.ability[1].toLowerCase(),
             this.ability[2].toLowerCase(),
             this.ability[3].toLowerCase(),
-          ],
-          weapon: this.weapon[0],
-          armor: this.armor[0],
+          ]
         };
         console.log(JSON.stringify(player));
         savePlayer(player);
@@ -129,7 +127,7 @@ export class Start extends Phaser.Scene {
           0,
           0,
           0,
-          (camera: any, progress: any) => {
+          (_camera: any, progress: any) => {
             if (progress === 1) {
               this.scene.start("Combat");
             }
