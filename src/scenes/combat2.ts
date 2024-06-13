@@ -210,7 +210,7 @@ export class Combat2 extends Phaser.Scene {
   }
 
   initializeAllies() {
-    for (let i = 1; i < 4; i++) {
+    for (let i = 1; i < 2; i++) {
       const ally = new Player(
         this,
         (GAME_WIDTH * i) / 4,
@@ -336,7 +336,7 @@ export class Combat2 extends Phaser.Scene {
   }
 
   simulateAllies() {
-    for (let i = 1; i < 4; i++) {
+    for (let i = 1; i < this.allies.length; i++) {
       const ally = this.allies[i];
       const action = this.allyActionStatus[i - 1];
       if (ally.isAlive() && ally.canAct()) {

@@ -336,7 +336,7 @@ export class Combat4 extends Phaser.Scene {
   }
 
   simulateAllies() {
-    for (let i = 1; i < 4; i++) {
+    for (let i = 1; i < this.allies.length; i++) {
       const ally = this.allies[i];
       const action = this.allyActionStatus[i - 1];
       if (ally.isAlive() && ally.canAct()) {
