@@ -72,7 +72,7 @@ export function playHeal(scene: Phaser.Scene, xPos: number, yPos: number) {
 function playMulti(scene: Phaser.Scene) {
   const multiAnim = scene.add.sprite(
     GAME_WIDTH / 2,
-    GAME_HEIGHT / 2,
+    GAME_HEIGHT / 2 - 172,
     "multi slash"
   );
   multiAnim.setScale(0.5);
