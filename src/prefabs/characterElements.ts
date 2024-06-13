@@ -195,6 +195,7 @@ export class Enemy extends Character {
   }
 
   selectTarget(allyParty: Player[], target: number = -1) {
+    console.log(allyParty.length);
     if (target > -1) {
       this.target = target;
       return;
@@ -210,10 +211,11 @@ export class Enemy extends Character {
     if (numAlliesDead >= allyParty.length) {
       return;
     }
+    console.log(allyParty.length);
 
-    this.target = Math.floor(Math.random() * 4);
+    this.target = Math.floor(Math.random() * allyParty.length);
     while (!allyParty[this.target].isAlive()) {
-      this.target = Math.floor(Math.random() * 4);
+      this.target = Math.floor(Math.random() * allyParty.length);
     }
 
     const selector = Math.floor(Math.random() * 10);
@@ -390,8 +392,6 @@ export class ActionBar extends HealthBar {
   }
 }
 
-
-
 export class Enemy1 extends Character {
   target: number;
   curAction: number;
@@ -403,7 +403,7 @@ export class Enemy1 extends Character {
     const enemy = scene.add.image(GAME_WIDTH / 2, 240, "slime");
     enemy.setScale(0.15);
 
-    this.target = Math.floor(4 * Math.random());
+    this.target = 0;
     this.curAction = 0;
 
     this.targetText = scene.add.text(
@@ -435,6 +435,8 @@ export class Enemy1 extends Character {
       return;
     }
 
+    console.log(allyParty.length);
+
     let numAlliesDead = 0;
     for (const allies of allyParty) {
       if (!allies.isAlive()) {
@@ -446,9 +448,9 @@ export class Enemy1 extends Character {
       return;
     }
 
-    this.target = Math.floor(Math.random() * 4);
+    this.target = Math.floor(Math.random() * allyParty.length);
     while (!allyParty[this.target].isAlive()) {
-      this.target = Math.floor(Math.random() * 4);
+      this.target = Math.floor(Math.random() * allyParty.length);
     }
 
     const selector = Math.floor(Math.random() * 10);
@@ -520,7 +522,7 @@ export class Enemy2 extends Character {
     const enemy = scene.add.image(GAME_WIDTH / 2, 240, "wolf");
     enemy.setScale(0.15);
 
-    this.target = Math.floor(4 * Math.random());
+    this.target = 0;
     this.curAction = 0;
 
     this.targetText = scene.add.text(
@@ -563,9 +565,9 @@ export class Enemy2 extends Character {
       return;
     }
 
-    this.target = Math.floor(Math.random() * 4);
+    this.target = Math.floor(Math.random() * allyParty.length);
     while (!allyParty[this.target].isAlive()) {
-      this.target = Math.floor(Math.random() * 4);
+      this.target = Math.floor(Math.random() * allyParty.length);
     }
 
     const selector = Math.floor(Math.random() * 10);
@@ -637,7 +639,7 @@ export class Enemy3 extends Character {
     const enemy = scene.add.image(GAME_WIDTH / 2, 240, "griffin");
     enemy.setScale(0.15);
 
-    this.target = Math.floor(4 * Math.random());
+    this.target = 0;
     this.curAction = 0;
 
     this.targetText = scene.add.text(
@@ -680,9 +682,9 @@ export class Enemy3 extends Character {
       return;
     }
 
-    this.target = Math.floor(Math.random() * 4);
+    this.target = Math.floor(Math.random() * allyParty.length);
     while (!allyParty[this.target].isAlive()) {
-      this.target = Math.floor(Math.random() * 4);
+      this.target = Math.floor(Math.random() * allyParty.length);
     }
 
     const selector = Math.floor(Math.random() * 10);

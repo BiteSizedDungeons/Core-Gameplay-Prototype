@@ -60,7 +60,7 @@ export class Combat1 extends Phaser.Scene {
     this.drawBackground();
     this.initializeUI();
     this.initializePlayer();
-    this.initializeAllies();
+    //this.initializeAllies();
     this.enemy = new Enemy1(this, 500);
 
     const status = this.add.text(GAME_WIDTH / 2 + 20, 92, "Status:");
@@ -108,7 +108,7 @@ export class Combat1 extends Phaser.Scene {
     this.drawSkills();
     this.player?.actionbar.update();
     this.enemy?.updateAction(this.allies);
-    this.simulateAllies();
+    //this.simulateAllies();
     this.drawUI();
 
     // auto mode
