@@ -26,7 +26,7 @@ export class Credits extends Phaser.Scene {
     this.korean = this.cache.json.get("korean");
     this.setLanguage(); // set language
 
-    const team_name_str = "Production Lead, Core Gameplay Programmer - Vince Kurniadjaja\nTranslatioin - Sooin Jung\nProgrammer - Christian Perez\nMusic - Louis Lim\nShuchen Liu\nNicholas Chon\nGuixiang Li\nJustin Park";
+    const team_name_str = "Production Lead & Design Lead - Vincent Kurniadjaja\nCore Gameplay Programmer & Designer - Shuchen Liu, Guixiang Li, Sooin Jung\nServer Developer - Christian Perez, Alex Ruiz, Justin Park\nArt - Nicholas Chong\nAnimations - Julian Sanchez\nTranslations - Sooin Jung\nMusic - Louis Lim";
 
     this.add
       .text(center_x, center_y, team_name_str, {
